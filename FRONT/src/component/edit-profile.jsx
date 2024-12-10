@@ -7,12 +7,12 @@ import {
   Save, 
   ArrowLeft 
 } from 'lucide-react';
-import CryptoJS from 'crypto-js';
-import Cookies from 'js-cookie';
+import CryptoJS from "crypto-js";
+import Cookies from "js-cookie";
 
 const EditProfilePage = () => {
   const [userData, setUserData] = useState({
-    documentId: '',
+    id: '',
     Username: '',
     Email: '',
     Bio: '',
@@ -43,10 +43,9 @@ const EditProfilePage = () => {
 
           // Find user by the specific token
           const user = data.find(u => u.Email === decodedEmail);
-
-        if (user) {
+        if (user) { 
           setUserData({
-            documentId: user.id, // Store the document ID
+            documentId: user.documentId, // Store the document ID
             Username: user.Username,
             Email: user.Email,
             Bio: user.Bio || '',
@@ -95,11 +94,9 @@ const EditProfilePage = () => {
     e.preventDefault();
 
     try {
-      // Prepare the payload according to the specified format
+      // Prepare the payload exactly as specified
       const payload = {
         data: {
-          ...userData,
-          // Remove documentId from the payload as it's not part of the data structure
           Email: userData.Email,
           Permission_level: userData.Permission_level,
           credentials: userData.credentials,
@@ -111,7 +108,8 @@ const EditProfilePage = () => {
         }
       };
 
-      // Use documentId in the URL for specific user update
+      // Use id in the URL for specific user update
+      
       const response = await fetch(`http://localhost:1337/api/user-ids/${userData.documentId}`, {
         method: 'PUT',
         headers: {
@@ -126,8 +124,8 @@ const EditProfilePage = () => {
       } else {
         // Handle error
         console.error('Update failed');
-        const errorResponse = await response.text();
-        console.error('Error details:', errorResponse);
+        const errorResponse = await response.json();
+        console.error('Error details:', JSON.stringify(errorResponse));
       }
     } catch (error) {
       console.error('Error updating profile:', error);
@@ -198,7 +196,7 @@ const EditProfilePage = () => {
                 onChange={handleInputChange}
                 className="w-full bg-transparent focus:outline-none"
                 placeholder="E-mail"
-                disabled // Email typically can't be changed
+                disabled
               />
             </div>
           </div>
