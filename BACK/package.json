@@ -1,0 +1,34 @@
+{
+  "name": "my-strapi-app",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A Strapi application",
+  "scripts": {
+    "build": "strapi build",
+    "deploy": "strapi deploy",
+    "develop": "strapi develop",
+    "start": "strapi start",
+    "strapi": "strapi"
+  },
+  "dependencies": {
+    "@strapi/plugin-cloud": "5.4.0",
+    "@strapi/plugin-documentation": "^5.4.1",
+    "@strapi/plugin-users-permissions": "5.4.0",
+    "@strapi/strapi": "^5.4.0",
+    "better-sqlite3": "^11.5.0",
+    "crypto-js": "^4.2.0",
+    "md6": "^0.0.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-router-dom": "^6.28.0",
+    "sharp": "^0.33.5",
+    "styled-components": "^6.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0 <=22.x.x",
+    "npm": ">=6.0.0"
+  },
+  "strapi": {
+    "uuid": "d930c85e-dd20-4c83-a2dd-b9758aabb834"
+  }
+}

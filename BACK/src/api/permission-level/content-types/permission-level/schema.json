@@ -1,0 +1,21 @@
+{
+  "kind": "collectionType",
+  "collectionName": "permission_levels",
+  "info": {
+    "singularName": "permission-level",
+    "pluralName": "permission-levels",
+    "displayName": "Permission_level"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Level": {
+      "type": "integer"
+    },
+    "Permission": {
+      "type": "string"
+    }
+  }
+}
