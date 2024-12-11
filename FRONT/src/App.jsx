@@ -6,8 +6,9 @@ import Register from "./component/Register"
 import Admin from "./component/Admin"
 import Seller from "./component/Seller"
 import Profile from "./component/profile"
-import CookieDisplay from "./component/CookieDisplay.jsx"
 import EditProfile from "./component/edit-profile"
+import EditPassword from "./component/edit-password"
+import CookieDisplay from "./component/CookieDisplay"
 import ProductDetails from "./component/ProductDetails"
 
 const App = () => {
@@ -24,6 +25,7 @@ const App = () => {
           <Route path="/profile" element={<Profile />} />
           <Route path="/CookieDisplay" element={<CookieDisplay />} />
           <Route path="/edit-profile" element={<EditProfile />} />
+          <Route path="/edit-password" element={<EditPassword />} />
           <Route path="/product/:documentId" element={<ProductDetails />} />
         </Routes>
       </div>

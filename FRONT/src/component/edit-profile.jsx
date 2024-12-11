@@ -110,7 +110,7 @@ const EditProfilePage = () => {
       });
 
       if (response.ok) {
-        navigate('/profile');
+        window.location.href = '/profile';
       } else {
         console.error('Update failed');
         const errorResponse = await response.json();

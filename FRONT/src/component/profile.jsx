@@ -6,7 +6,8 @@ import {
   Shield, 
   Edit, 
   Camera, 
-  LogOut 
+  LogOut,
+  KeyRound
 } from 'lucide-react';
 import CryptoJS from 'crypto-js';
 import Cookies from 'js-cookie';
@@ -49,11 +50,15 @@ const ProfilePage = () => {
 
   const handleLogout = () => {
     document.cookie.split(";").forEach(c => document.cookie = c.trim().split("=")[0] + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/");
-    navigate('/login');
+    window.location.href = '/login';
   };
 
   const handleEditProfile = () => {
     navigate('/edit-profile');
+  };
+
+  const handleEditPassword = () => {
+    navigate('/edit-password');
   };
 
   const handlePopupClose = () => {
@@ -150,6 +155,12 @@ const ProfilePage = () => {
           className="w-full mt-6 bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-600 transition flex items-center justify-center"
         >
           <Edit className="mr-2" /> Modifier le Profil
+        </button>
+        <button 
+          onClick={handleEditPassword}
+          className="w-full mt-6 bg-orange-600 text-white py-3 rounded-lg hover:bg-orange-700 transition flex items-center justify-center"
+        >
+          <KeyRound className="mr-2" /> Modifier le mot de passe
         </button>
       </div>
 

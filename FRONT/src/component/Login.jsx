@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Eye, EyeOff, Facebook, Twitter, Mail, Github } from "lucide-react";
-import { useNavigate } from "react-router-dom";
 import CryptoJS from "crypto-js";
 import Cookies from "js-cookie";
 
@@ -13,7 +12,6 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
-  const navigate = useNavigate();
 
   const socialIcons = [
     { icon: <Facebook size={20} />, color: "hover:bg-orange-500" },
@@ -50,7 +48,7 @@ const Login = () => {
             }
 
             alert("Login successful!");
-            navigate("/profile"); 
+            window.location.href = "/profile"; 
           } else {
             alert("Invalid email or password!");
           }

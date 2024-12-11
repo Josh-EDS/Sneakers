@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { ChevronLeft, ShoppingCart, Truck, ShieldCheck } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
@@ -36,7 +36,6 @@ const ProductPage = () => {
   }, []);
 
   const handleAddToCart = () => {
-    // Logique d'ajout au panier
     toast.success(`${quantity} ${product.name} ajouté(s) au panier`, {
       position: "top-right",
       duration: 2000,
@@ -69,7 +68,7 @@ const ProductPage = () => {
         onClick={handleGoBack} 
         className="px-4 py-2 border border-gray-300 rounded hover:bg-gray-100 transition"
       >
-        Retour à l'accueil
+        Retour à l&apos;accueil
       </button>
     </div>
   );
