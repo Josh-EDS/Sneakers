@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
   User, 
@@ -13,38 +13,30 @@ import Cookies from 'js-cookie';
 
 const ProfilePage = () => {
   const [userData, setUserData] = useState(null);
-  const [showPopup, setShowPopup] = useState(false); // State to control popup visibility
-  const [redirectToAdmin, setRedirectToAdmin] = useState(false); // Flag to trigger redirection to admin
+  const [showPopup, setShowPopup] = useState(false);
+  const [redirectToAdmin, setRedirectToAdmin] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Decrypt the email from cookies
     const token = Cookies.get("Token");
     if (!token) return navigate('/login');
     
       const [decodedEmail] = CryptoJS.AES.decrypt(token, '92d7a9a5942a4a7c9b18d5046a5f8fa3b7f0bb7db5c64f2a4675d7d8a2d67f51')
         .toString(CryptoJS.enc.Utf8)
         .split(':');
-
-      // Fetch user data by specific token
       const fetchUserData = async () => {
         try {
           const response = await fetch('http://localhost:1337/api/user-ids');
           const jsonData = await response.json();
           const data = jsonData.data || jsonData;
-
-          // Find user by the specific token
           const user = data.find(u => u.Email === decodedEmail);
 
           if (user) {
             setUserData(user);
-            
-            // Check Permission level and trigger popup if needed
             if (user.Permission_level > 0) {
-              setShowPopup(true); // Show the popup to ask about admin page redirection
+              setShowPopup(true);
             }
           } else {
-            // If no user found, redirect to login
             navigate('/login');
           }
         } catch (error) {
@@ -65,17 +57,17 @@ const ProfilePage = () => {
   };
 
   const handlePopupClose = () => {
-    setShowPopup(false); // Close the popup without redirection
+    setShowPopup(false);
   };
 
   const handleRedirectToAdmin = () => {
-    setRedirectToAdmin(true); // Set flag to trigger redirection
-    setShowPopup(false); // Close the popup
+    setRedirectToAdmin(true);
+    setShowPopup(false);
   };
 
   useEffect(() => {
     if (redirectToAdmin) {
-      navigate('/admin'); // Redirect to admin if flag is true
+      navigate('/admin');
     }
   }, [redirectToAdmin, navigate]);
 
@@ -165,7 +157,7 @@ const ProfilePage = () => {
         <p>Compte créé le {new Date(userData.createdAt).toLocaleDateString()}</p>
       </div>
 
-      {/* Popup Modal */}
+      {/* Popup */}
       {showPopup && (
         <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50">
           <div className="bg-white p-6 rounded-lg shadow-xl">

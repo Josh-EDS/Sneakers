@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Eye, EyeOff, Facebook, Twitter, Mail, Github } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import CryptoJS from "crypto-js";

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import CryptoJS from "crypto-js";
 import Cookies from "js-cookie";
@@ -26,7 +26,7 @@ const Navbar = () => {
         
         getProfilePic(decodedEmail).then(setProfilePic);
       } catch {
-        setProfilePic(null); // If token decoding fails, reset profilePic to null
+        setProfilePic(null);
       }
     }
   }, []);
@@ -40,7 +40,7 @@ const Navbar = () => {
         </Link>
       </div>
 
-      {/* Navbar Links */}
+      {/* Barre de nav */}
       <nav className="flex items-center space-x-10">
         <Link to="/" className="relative group text-black no-underline">
           Home

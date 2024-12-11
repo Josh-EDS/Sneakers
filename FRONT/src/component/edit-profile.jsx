@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
   User, 
@@ -26,26 +26,21 @@ const EditProfilePage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Fetch user data by specific token
     const token = Cookies.get("Token");
     if (!token) return navigate('/login');
     
       const [decodedEmail] = CryptoJS.AES.decrypt(token, '92d7a9a5942a4a7c9b18d5046a5f8fa3b7f0bb7db5c64f2a4675d7d8a2d67f51')
         .toString(CryptoJS.enc.Utf8)
         .split(':');
-
-      // Fetch user data by specific token
       const fetchUserData = async () => {
         try {
           const response = await fetch('http://localhost:1337/api/user-ids');
           const jsonData = await response.json();
           const data = jsonData.data || jsonData;
-
-          // Find user by the specific token
           const user = data.find(u => u.Email === decodedEmail);
         if (user) { 
           setUserData({
-            documentId: user.documentId, // Store the document ID
+            documentId: user.documentId,
             Username: user.Username,
             Email: user.Email,
             Bio: user.Bio || '',
@@ -77,7 +72,6 @@ const EditProfilePage = () => {
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        // Convert image to base64 with data URL prefix
         const base64Image = `data:image/png;base64,${reader.result.split(',')[1]}`;
         
         setProfileImage(file);
@@ -94,7 +88,6 @@ const EditProfilePage = () => {
     e.preventDefault();
 
     try {
-      // Prepare the payload exactly as specified
       const payload = {
         data: {
           Email: userData.Email,
@@ -107,8 +100,6 @@ const EditProfilePage = () => {
           locale: userData.locale
         }
       };
-
-      // Use id in the URL for specific user update
       
       const response = await fetch(`http://localhost:1337/api/user-ids/${userData.documentId}`, {
         method: 'PUT',
@@ -119,10 +110,8 @@ const EditProfilePage = () => {
       });
 
       if (response.ok) {
-        // Navigate back to profile page
         navigate('/profile');
       } else {
-        // Handle error
         console.error('Update failed');
         const errorResponse = await response.json();
         console.error('Error details:', JSON.stringify(errorResponse));
